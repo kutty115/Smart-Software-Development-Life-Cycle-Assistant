@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧠 Smart SDLC Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    .background-blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("/static/sdlc.jpg") no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(5px); /* Slight blur */
+      z-index: -2;
+    }
+
+    .background-blur::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #0f2b44;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      z-index: 2;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px 25px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #00bcd4;
+      color: #000;
+    }
+
+    .main-content {
+      margin-left: 270px;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .glass-box {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 900px;
+      margin: auto;
+      color: #111;
+    }
+
+    textarea, input[type="file"], input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    input[type="submit"] {
+      background-color: #0f2b44;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005f73;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-blur"></div>
+
+  <div class="sidebar">
+    <a href="/" class="{% if module == 'home' %}active{% endif %}">🏠 Home</a>
+    <a href="/requirements" class="{% if module == 'requirements' %}active{% endif %}">📄 Requirements</a>
+    <a href="/codegen" class="{% if module == 'codegen' %}active{% endif %}">💻 Code Generator</a>
+    <a href="/bugfix" class="{% if module == 'bugfix' %}active{% endif %}">🐞 Bug Fixer</a>
+    <a href="/testcases" class="{% if module == 'testcases' %}active{% endif %}">🧪 Test Cases</a>
+    <a href="/summarizer" class="{% if module == 'summarizer' %}active{% endif %}">📑 Summarizer</a>
+    <a href="/chatbot" class="{% if module == 'chatbot' %}active{% endif %}">💬 AI Chatbot</a>
+  </div>
+
+  <div class="main-content">
+    <div class="glass-box">
+      {% if module == 'home' %}
+        <h2>Welcome to 🧠 Smart SDLC – AI Assistant</h2>
+        <p>Smart SDLC is your intelligent assistant for streamlining every phase of the software development lifecycle (SDLC).
+    This platform helps you automate and accelerate key development tasks such as requirement classification, code generation, bug fixing, test case creation, code summarization.</p>
+      {% elif module == 'requirements' %}
+        <h2>📄 Requirement Classification</h2>
+        <form method="POST" enctype="multipart/form-data">
+          <input type="file" name="pdf_file">
+          <input type="submit" value="Classify Requirements">
+        </form>
+      {% elif module == 'codegen' %}
+        <h2>💻 Code Generator</h2>
+        <form method="POST">
+          <textarea name="input_text" rows="6" placeholder="Enter description for code generation..."></textarea>
+          <input type="submit" value="Generate Code">
+        </form>
+      {% elif module == 'bugfix' %}
+        <h2>🐞 Bug Fixer</h2>
+        <form method="POST">
+          <textarea name="input_text" rows="6" placeholder="Paste buggy code here..."></textarea>
+          <input type="submit" value="Fix Code">
+        </form>
+      {% elif module == 'testcases' %}
+        <h2>🧪 Generate Unit Tests</h2>
+        <form method="POST">
+          <textarea name="input_text" rows="6" placeholder="Enter code logic to test..."></textarea>
+          <input type="submit" value="Generate Tests">
+        </form>
+      {% elif module == 'summarizer' %}
+        <h2>📑 Code Summarizer</h2>
+        <form method="POST">
+          <textarea name="input_text" rows="6" placeholder="Paste code to summarize..."></textarea>
+          <input type="submit" value="Summarize Code">
+        </form>
+      {% elif module == 'chatbot' %}
+        <h2>💬 AI Chatbot</h2>
+        <form method="POST">
+          <textarea name="input_text" rows="3" placeholder="Ask something about SDLC..."></textarea>
+          <input type="submit" value="Ask">
+        </form>
+      {% endif %}
+
+      {% if output %}
+        <h3>Output:</h3>
+        <div style="white-space: pre-wrap; background: #f4f4f4; padding: 15px; border-radius: 10px; color: #000;">
+          {{ output }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>
+
