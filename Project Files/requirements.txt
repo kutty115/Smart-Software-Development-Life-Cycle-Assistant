@@ -1,4 +1,0 @@
-
-Flask
-PyMuPDF
-ibm-watsonx-ai
