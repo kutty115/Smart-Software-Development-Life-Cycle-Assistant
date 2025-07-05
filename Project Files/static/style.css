@@ -1,33 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
 }
 
-.container {
-    width: 80%;
-    background: white;
-    padding: 20px;
-    margin: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
+/* Background blur layer with dark overlay */
+.background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/static/sdlc.jpg") no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(5px);
+  z-index: -2;
 }
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
+.background-blur::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Sidebar for desktop */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #0f2b44;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  z-index: 2;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px 25px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #00bcd4;
+  color: #000;
+}
+
+/* Main content for desktop */
+.main-content {
+  margin-left: 270px;
+  padding: 60px 40px;
+  position: relative;
+  z-index: 3;
+}
+
+.glass-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 900px;
+  margin: auto;
+  color: #111;
+}
+
+/* Forms and inputs */
+textarea,
+input[type="file"],
+input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 1em;
 }
 
 input[type="submit"] {
-    background-color: #e60000;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #0f2b44;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
+
+input[type="submit"]:hover {
+  background-color: #005f73;
+}
+
+/* Responsive mobile styles */
 @media (max-width: 768px) {
   .sidebar {
     position: relative;
