@@ -6,10 +6,13 @@ import json
 app = Flask(__name__)
 
 # --- IBM Watsonx Credentials ---
-api_key = ""
-project_id = ""
-base_url = ""
-model_id = ""
+import os
+
+api_key = os.environ.get("IBM_API_KEY")
+project_id = os.environ.get("IBM_PROJECT_ID")
+base_url = os.environ.get("IBM_BASE_URL")
+model_id = os.environ.get("IBM_MODEL_ID")
+
 
 # --- Watsonx Query Function ---
 def ask_watsonx(prompt):
